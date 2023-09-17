@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.teamdrawer.teamdrawerapi.DTO.PlayerDTO;
 import com.teamdrawer.teamdrawerapi.model.PlayerModel;
 import com.teamdrawer.teamdrawerapi.repositories.PlayerRepository;
 
@@ -18,13 +19,14 @@ public class PlayerService {
         return  playerRepository.findAll();
     }
 
-    public void getTeamsService(){
+    public List<PlayerModel> getTeamsService(){
         List<PlayerModel> allPlayers = getPlayersService();
         System.out.println("Todos os jofadores" + allPlayers);
+        return allPlayers;
     }
 
-    public String createPlayerService(PlayerModel player){
-        playerRepository.save(player);
+    public String createPlayerService(PlayerDTO player){
+        playerRepository.save(new PlayerModel(player));
         return "PLayer created with sucess";
     }
 
