@@ -22,8 +22,8 @@ public class PlayerController {
     PlayerService playerService;
 
     @GetMapping("times")
-     public List<PlayerModel> getTeams(){
-        List<PlayerModel> teams = playerService.getTeamsService();
+     public List<String> getTeams(){
+        List<String> teams = playerService.getTeamsService();
         return teams;
     }
 

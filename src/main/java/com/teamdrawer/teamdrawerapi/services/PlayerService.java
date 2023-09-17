@@ -1,6 +1,7 @@
 package com.teamdrawer.teamdrawerapi.services;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,10 +20,14 @@ public class PlayerService {
         return  playerRepository.findAll();
     }
 
-    public List<PlayerModel> getTeamsService(){
+    public List<String> getTeamsService(){
         List<PlayerModel> allPlayers = getPlayersService();
-        System.out.println("Todos os jofadores" + allPlayers);
-        return allPlayers;
+        
+        List<String> listNames = allPlayers.stream()
+        .map(player -> player.getNome().toString())
+        .collect(Collectors.toList());
+
+        return listNames;
     }
 
     public String createPlayerService(PlayerDTO player){
