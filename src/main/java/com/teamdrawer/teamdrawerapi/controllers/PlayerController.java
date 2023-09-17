@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,21 +24,21 @@ public class PlayerController {
     PlayerService playerService;
 
     @GetMapping("times")
-     public Map<String, List<String>> getTeams(){
+     public ResponseEntity<Map<String, List<String>>> getTeams(){
         Map<String, List<String>> teams = playerService.getTeamsService();
-        return teams;
+        return ResponseEntity.ok(teams);
     }
 
     @PostMapping("jogador")
-    public String createPlayer(@RequestBody PlayerDTO req){
+    public ResponseEntity createPlayer(@RequestBody PlayerDTO req){
         playerService.createPlayerService(req);
-        return "Testando rota post";
+        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("jogador/all")
-    public String deleteAllPlayers(){
+    public ResponseEntity deleteAllPlayers(){
         playerService.deleteAllPlayers();
-        return "Testando rota delete";
+        return ResponseEntity.ok().build();
     }
     
 }
