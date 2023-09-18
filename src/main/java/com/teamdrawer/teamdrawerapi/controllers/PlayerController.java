@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,18 +24,21 @@ public class PlayerController {
     @Autowired
     PlayerService playerService;
 
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @GetMapping("times")
      public ResponseEntity<Map<String, List<String>>> getTeams(){
         Map<String, List<String>> teams = playerService.getTeamsService();
         return ResponseEntity.ok(teams);
     }
 
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PostMapping("jogador")
     public ResponseEntity createPlayer(@RequestBody PlayerDTO req){
         playerService.createPlayerService(req);
         return ResponseEntity.ok().build();
     }
 
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @DeleteMapping("jogador/all")
     public ResponseEntity deleteAllPlayers(){
         playerService.deleteAllPlayers();
